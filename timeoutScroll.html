@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+<meta name="keywords" content="关键字1,关键字2" />    
+<meta name="Description" content="描述信息" />
+<title>间歇循环滚动</title>
+<!--CSS/JS-->
+<style type="text/css">
+*{margin:0;padding:0;}
+ul,li{list-style:none;display:block;}
+#scrollBox{height:144px;width:300px;margin:100px auto;background:#f09;overflow:hidden;}
+#scrollBox #con1,#con2{width:280px;float:left;}
+#scrollBox li{line-height:24px;text-align:center;}
+
+</style>
+
+
+</head>
+<body>
+<!--div-->
+<div id="scrollBox">
+<ul id="con1">
+<li>我是测试内容1！！<li>
+<li>我是测试内容2！！<li>
+<li>我是测试内容3！！<li>
+<li>我是测试内容4！！<li>
+<li>我是测试内容5！！<li>
+<li>我是测试内容6！！<li>
+<li>我是测试内容7！！<li>
+<li>我是测试内容8！！<li>
+<li>我是测试内容9！！<li>
+</ul>
+
+</div>
+<script type="text/javascript">    
+var area =document.getElementById('scrollBox');    
+var lHeight = 24;
+var time = 50;
+area.innerHTML+=area.innerHTML;
+area.scrollTop = 0;
+var timer;
+function scrollMove(){
+area.scrollTop++;
+timer = setInterval("scrollUp()",time);
+}
+
+function scrollUp(){
+if(area.scrollTop % lHeight==0){//滚动一行后，延时2秒
+clearInterval(timer);
+setTimeout("scrollMove()",2000);
+}else{
+area.scrollTop++;
+if(area.scrollTop>=area.scrollHeight/2){    //判断滚动高度,当滚动高度大于area本身的高度时，使其回到原点重新滚动    
+area.scrollTop = 0;    
+}
+}
+
+}    
+
+setTimeout("scrollMove()",2000);//延迟2秒后执行scrollMove
+
+
+</script>
+</body>
+
+</html>
